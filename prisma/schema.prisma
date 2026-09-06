@@ -1,0 +1,123 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model College {
+  id                String      @id @default(uuid())
+  slug              String      @unique
+  name              String
+  shortName         String
+  location          String
+  state             String
+  city              String
+  stream            String
+  establishmentYear Int
+  type              String      // e.g. Public, Private, Autonomous
+  nirfRank          Int
+  naacGrade         String      // e.g. A++, A+, A
+  rating            Float       @default(4.5)
+  totalReviews      Int         @default(120)
+  avgPackage        Float       // LPA
+  highestPackage    Float       // LPA
+  tuitionFeesMin    Int         // Total fees in INR
+  tuitionFeesMax    Int         // Total fees in INR
+  campusSize        String      // e.g. "550 Acres"
+  image             String
+  logo              String
+  bannerImage       String
+  description       String
+  featured          Boolean     @default(false)
+  
+  courses           Course[]
+  placementStats    Placement[]
+  reviews           Review[]
+  cutoffs           Cutoff[]
+  questions         Question[]
+  
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+}
+
+model Course {
+  id           String   @id @default(uuid())
+  collegeId    String
+  college      College  @relation(fields: [collegeId], references: [id], onDelete: Cascade)
+  name         String
+  stream       String
+  degree       String
+  duration     String
+  totalFees    Int
+  seats        Int
+  eligibility  String
+  createdAt    DateTime @default(now())
+}
+
+model Placement {
+  id                  String   @id @default(uuid())
+  collegeId           String
+  college             College  @relation(fields: [collegeId], references: [id], onDelete: Cascade)
+  year                Int
+  avgPackage          Float
+  highestPackage      Float
+  medianPackage       Float
+  placementPercentage Float
+  topRecruiters       String   // Comma separated company names
+  createdAt           DateTime @default(now())
+}
+
+model Review {
+  id         String   @id @default(uuid())
+  collegeId  String
+  college    College  @relation(fields: [collegeId], references: [id], onDelete: Cascade)
+  authorName String
+  authorRole String
+  rating     Float
+  title      String
+  comment    String
+  pros       String
+  cons       String
+  createdAt  DateTime @default(now())
+}
+
+model Cutoff {
+  id          String   @id @default(uuid())
+  collegeId   String
+  college     College  @relation(fields: [collegeId], references: [id], onDelete: Cascade)
+  exam        String   // JEE Main, JEE Advanced, CAT, NEET, GATE
+  category    String   // General, OBC, SC, ST, EWS
+  courseName  String
+  openingRank Int
+  closingRank Int
+  percentile  Float?
+  year        Int      @default(2024)
+  createdAt   DateTime @default(now())
+}
+
+model Question {
+  id         String   @id @default(uuid())
+  collegeId  String?
+  college    College? @relation(fields: [collegeId], references: [id], onDelete: SetNull)
+  authorName String
+  title      String
+  content    String
+  category   String   // Admissions, Cutoffs, Placement, Campus Life
+  upvotes    Int      @default(0)
+  answers    Answer[]
+  createdAt  DateTime @default(now())
+}
+
+model Answer {
+  id         String   @id @default(uuid())
+  questionId String
+  question   Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  authorName String
+  authorRole String
+  content    String
+  upvotes    Int      @default(0)
+  createdAt  DateTime @default(now())
+}
