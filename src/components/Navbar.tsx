@@ -40,7 +40,7 @@ export const Navbar: React.FC = () => {
             </div>
             <div className="flex flex-col">
               <span className="text-xl font-bold bg-gradient-to-r from-white via-slate-100 to-slate-300 bg-clip-text text-transparent tracking-tight">
-                Uni<span className="text-indigo-400">Sphere</span>
+                Ma<span className="text-indigo-400">badi</span>
               </span>
               <span className="text-[10px] text-indigo-400 font-medium tracking-wider uppercase -mt-1">
                 College Intelligence

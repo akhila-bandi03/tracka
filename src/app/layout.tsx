@@ -9,7 +9,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "UniSphere — College Discovery & Decision Platform",
+  title: "Mabadi — College Discovery & Decision Platform",
   description: "Search, filter, and compare top Indian colleges. Features verified NIRF ranks, actual tuition fees, placement CTCs, cutoff predictor, and student Q&A forum.",
 };
 

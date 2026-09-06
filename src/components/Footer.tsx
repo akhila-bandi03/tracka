@@ -11,7 +11,7 @@ export const Footer: React.FC = () => {
             <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 flex items-center justify-center text-white">
               <GraduationCap className="w-5 h-5" />
             </div>
-            <span className="text-xl font-bold text-white">UniSphere</span>
+            <span className="text-xl font-bold text-white">Mabadi</span>
           </div>
           <p className="text-sm text-slate-400 leading-relaxed">
             India's most trusted college decision platform. Real placement data, cutoff predictor, and verified student reviews.
@@ -53,7 +53,7 @@ export const Footer: React.FC = () => {
       </div>
 
       <div className="max-w-7xl mx-auto border-t border-slate-800/80 mt-10 pt-6 flex flex-col sm:flex-row justify-between items-center text-xs">
-        <p>© {new Date().getFullYear()} UniSphere Inc. All rights reserved.</p>
+        <p>© {new Date().getFullYear()} Mabadi Inc. All rights reserved.</p>
         <p className="flex items-center space-x-1 mt-2 sm:mt-0">
           <span>Built with</span>
           <Heart className="w-3.5 h-3.5 text-pink-500 fill-pink-500" />
