@@ -201,10 +201,26 @@ function CollegesContent() {
                 </button>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {colleges.map((college) => (
-                  <CollegeCard key={college.id} college={college} />
-                ))}
+              <div className="space-y-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {colleges.map((college) => (
+                    <CollegeCard key={college.id} college={college} />
+                  ))}
+                </div>
+
+                {/* Pagination Status & Controls */}
+                <div className="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
+                  <span>Showing page 1 of 1 ({colleges.length} results)</span>
+                  <div className="flex items-center space-x-2">
+                    <button disabled className="px-3.5 py-2 rounded-xl bg-slate-950 border border-slate-800 text-slate-600 cursor-not-allowed">
+                      Previous
+                    </button>
+                    <span className="px-3 py-2 rounded-xl bg-indigo-600 text-white font-bold">1</span>
+                    <button disabled className="px-3.5 py-2 rounded-xl bg-slate-950 border border-slate-800 text-slate-600 cursor-not-allowed">
+                      Next
+                    </button>
+                  </div>
+                </div>
               </div>
             )}
           </div>
