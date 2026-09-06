@@ -17,12 +17,13 @@ import {
   Star,
   CheckCircle2,
   Trash2,
+  Bookmark,
   Sparkles,
   ArrowRight,
 } from 'lucide-react';
 
 export default function ComparePage() {
-  const { compareIds, removeFromCompare, clearCompare, addToCompare } = useCollegeContext();
+  const { compareIds, removeFromCompare, clearCompare, addToCompare, saveCurrentComparison } = useCollegeContext();
 
   const [colleges, setColleges] = useState<CollegeData[]>([]);
   const [loading, setLoading] = useState(true);
@@ -79,13 +80,26 @@ export default function ComparePage() {
           </div>
 
           {compareIds.length > 0 && (
-            <button
-              onClick={clearCompare}
-              className="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-400 hover:text-pink-400 hover:border-pink-500/30 flex items-center space-x-2 self-start sm:self-auto"
-            >
-              <Trash2 className="w-4 h-4" />
-              <span>Clear All</span>
-            </button>
+            <div className="flex items-center space-x-2 self-start sm:self-auto">
+              <button
+                onClick={() => {
+                  const setName = prompt('Enter a name for this comparison set:', 'Target Engineering IITs');
+                  if (setName) saveCurrentComparison(setName);
+                }}
+                className="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs flex items-center space-x-2 shadow-md shadow-indigo-600/20"
+              >
+                <Bookmark className="w-4 h-4" />
+                <span>Save Comparison Set</span>
+              </button>
+
+              <button
+                onClick={clearCompare}
+                className="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 text-xs text-slate-400 hover:text-pink-400 hover:border-pink-500/30 flex items-center space-x-2"
+              >
+                <Trash2 className="w-4 h-4" />
+                <span>Clear All</span>
+              </button>
+            </div>
           )}
         </div>
       </div>

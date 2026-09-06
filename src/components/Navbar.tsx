@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useCollegeContext } from '@/context/CollegeContext';
+import { useAuth } from '@/context/AuthContext';
 import {
   GraduationCap,
   Search,
@@ -14,11 +15,15 @@ import {
   MessageSquare,
   Menu,
   X,
+  User,
+  LogIn,
+  LogOut,
 } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
   const pathname = usePathname();
   const { savedIds, compareIds } = useCollegeContext();
+  const { user, openAuthModal, logout } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
@@ -76,6 +81,31 @@ export const Navbar: React.FC = () => {
                 </Link>
               );
             })}
+
+            {/* Auth Action */}
+            {user ? (
+              <div className="flex items-center space-x-2 ml-2 pl-2 border-l border-slate-800">
+                <div className="flex items-center space-x-2 px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-xs">
+                  <User className="w-3.5 h-3.5 text-indigo-400" />
+                  <span className="font-bold text-white max-w-[100px] truncate">{user.name}</span>
+                </div>
+                <button
+                  onClick={logout}
+                  className="p-2 rounded-lg text-slate-400 hover:text-pink-400 hover:bg-slate-800 transition text-xs"
+                  title="Log Out"
+                >
+                  <LogOut className="w-4 h-4" />
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={openAuthModal}
+                className="ml-2 px-3.5 py-2 rounded-lg text-xs font-bold bg-slate-900 hover:bg-slate-800 text-indigo-300 border border-slate-700 transition flex items-center space-x-1.5"
+              >
+                <LogIn className="w-3.5 h-3.5" />
+                <span>Log In</span>
+              </button>
+            )}
           </nav>
 
           {/* Mobile Menu Button */}

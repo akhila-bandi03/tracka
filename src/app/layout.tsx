@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { CollegeProvider } from "@/context/CollegeContext";
+import { AuthProvider } from "@/context/AuthContext";
+import { AuthModal } from "@/components/AuthModal";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -21,7 +23,12 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} h-full antialiased dark`}>
       <body className="min-h-full flex flex-col bg-slate-950 text-slate-100 font-sans">
-        <CollegeProvider>{children}</CollegeProvider>
+        <AuthProvider>
+          <CollegeProvider>
+            {children}
+            <AuthModal />
+          </CollegeProvider>
+        </AuthProvider>
       </body>
     </html>
   );
