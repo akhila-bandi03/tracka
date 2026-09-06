@@ -208,6 +208,19 @@ export default function ComparePage() {
                     ))}
                   </tr>
 
+                  {/* Campus Location */}
+                  <tr className="hover:bg-slate-800/40">
+                    <td className="p-4 font-semibold text-slate-400 flex items-center space-x-2">
+                      <Building className="w-4 h-4 text-indigo-400" />
+                      <span>Campus Location</span>
+                    </td>
+                    {colleges.map((c) => (
+                      <td key={c.id} className="p-4 font-medium text-slate-200">
+                        {c.location}, {c.state}
+                      </td>
+                    ))}
+                  </tr>
+
                   {/* Total Tuition Fees */}
                   <tr className="hover:bg-slate-800/40">
                     <td className="p-4 font-semibold text-slate-400 flex items-center space-x-2">
